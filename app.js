@@ -4,7 +4,99 @@ var that;
 App({
   globalData: {
     collection: '',
-    playlist:''
+    playlist:'',
+    orders: [{
+      id: 1,
+      orderid:"abc",
+      createtime: "2019-04-01",
+      updatetime: "2019-04-30",
+      startTransportTime: "2019-04-01",
+      endTransportTime: "2019-04-30",
+      receiver: "李艺",
+      remark: "备注",
+      seller: "李艺",
+      carNum: "68007",
+      totalDistance: 111,
+      totalTon: 1111,
+      tradeStatus: 201
+    },
+    {
+      id: 1,
+      orderid: "abcd",
+      createtime: "2019-04-01",
+      updatetime: "2019-04-30",
+      startTransportTime: "2019-04-01",
+      endTransportTime: "2019-04-30",
+      receiver: "李艺",
+      remark: "备注",
+      seller: "李艺",
+      carNum: "68007,68008",
+      totalDistance: 111,
+      totalTon: 1111,
+      tradeStatus: 202
+    },
+    {
+      id: 1,
+      orderid: "asd",
+      createtime: "2019-04-01",
+      updatetime: "2019-04-30",
+      startTransportTime: "2019-04-01",
+      endTransportTime: "2019-04-30",
+      receiver: "李艺",
+      remark: "备注",
+      seller: "李艺",
+      carNum:"68007",
+      totalDistance: 111,
+      totalTon: 1111,
+      tradeStatus: 201
+    },
+    {
+      id: 1,
+      orderid: "liyi",
+      createtime: "2019-04-01",
+      updatetime: "2019-04-30",
+      startTransportTime: "2019-04-01",
+      endTransportTime: "2019-04-30",
+      receiver: "李艺",
+      remark: "备注",
+      seller: "李艺",
+      carNum: "68007",
+      totalDistance: 111,
+      totalTon: 1111,
+      tradeStatus: 202
+    },
+    {
+      id: 1,
+      orderid: "asdadasdads",
+      createtime: "2019-04-01",
+      updatetime: "2019-04-30",
+      startTransportTime: "2019-04-01",
+      endTransportTime: "2019-04-30",
+      receiver: "李艺",
+      remark: "备注",
+      seller: "李艺",
+      carNum: "68007",
+      totalDistance: 111,
+      totalTon: 1111,
+      tradeStatus: 200
+    },
+    {
+      id: 1,
+      orderid: "asdadasd",
+      createtime: "2019-04-01",
+      updatetime: "2019-04-30",
+      startTransportTime: "2019-04-01",
+      endTransportTime: "2019-04-30",
+      receiver: "李艺",
+      remark: "备注",
+      seller: "李艺",
+      carNum: "68007",
+      totalDistance: 111,
+      totalTon: 1111,
+      tradeStatus: 200
+    }
+    ],
+
   },
   onLaunch: function () {
     that=this;

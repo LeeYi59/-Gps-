@@ -1,0 +1,38 @@
+<!--index.wxml-->
+<view class='playback-container'>
+  <view class="imageBox">
+    <image class="image-front" src="{{img.fronUrl}}" wx:if="{{img.isShow}}"></image>
+    <image class="image-after" src="{{img.afterUrl}}" wx:if="{{img.isShow}}"></image>
+  </view>
+  <view class="selectSpeedPicker">
+    
+    <picker bindchange="setSpeed" value="{{picker.index}}" range="{{picker.array}}">
+    x{{picker.array[picker.index]}}
+    </picker>
+  </view>
+  
+  <view class="progress">
+ 
+
+  <image class="progress-button" src="/resources/pause.png" bindtap="pauseAnimation" wx:if="{{progress.isPlay}}"></image>
+  <image class="progress-button" src="/resources/start.png" bindtap="startAnimation" wx:else></image>
+  <slider class="progress-slider" step="1" block-size="15" block-color="green" min="0" max="{{progress.total}}" value="{{progress.now}}" bindchanging="setSliderChanging" bindchange="setSliderChange"/>
+  <view class="progress-text">{{progress.now}}/{{progress.total}}</view>
+</view>
+
+<map 
+id="map"
+class='map'
+longitude="{{map.lng}}" 
+latitude="{{map.lat}}" 
+scale="20" 
+enable-zoom=true 
+bindcontroltap="controltap" 
+markers="{{map.markers}}" 
+polyline="{{map.polyline}}" 
+bindmarkertap="markertap" 
+bindregionchange="regionchange" 
+show-location
+wx:if="{{map.isShow}}"></map>
+<!-- <> -->
+</view>

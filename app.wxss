@@ -1,14 +1,23 @@
 /**app.wxss**/
 page{
+  background-color:#ebebeb;
   height: 100%;
-  /* background-color:blanchedalmond; */
 }
-.container {
+.playback-container {
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
 } 
+.order-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
 

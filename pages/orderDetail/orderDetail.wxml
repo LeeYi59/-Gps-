@@ -1,0 +1,71 @@
+<view class="order-container">
+  <view class="orderlist" >
+   
+    <view class="card-column"  wx:for="{{orders}}" bindtap="onItemClick" id="{{index}}">
+   
+      <view class="card-row">
+        <view class="card-person-key">发货人:</view>
+        <view class="card-person-value">{{item.seller}}</view>
+        <view class="card-person-key">收货人:</view>
+        <view class="card-person-value">{{item.receiver}}</view>
+      </view>
+       
+    
+
+
+      <view class="card-row">
+        <view class="card-key">状态:</view>
+        <view class="card-value" wx:if="{{item.tradeStatus==200}}" style="color:red;">未开始</view>
+        <view class="card-value" wx:elif="{{item.tradeStatus==201}}" style="color:#ff9900;">运输中</view>
+        <view class="card-value" wx:elif="{{item.tradeStatus==202}}" style="color:green;">已完成</view>
+      </view>
+
+      <view class="card-row">
+        <view class="card-key">总里程:</view>
+        <view class="card-value">{{item.totalDistance}}km</view>
+      </view>
+
+      <view class="card-row">
+        <view class="card-key">总重量:</view>
+        <view class="card-value">{{item.totalTon}}吨</view>
+      </view>
+
+
+      <view class="card-row">
+        <view class="card-key">创建时间:</view>
+        <view class="card-value">{{item.createtime}}</view>
+        <!-- <view class="card-key">最后修改时间:</view>
+        <view class="card-value">{{item.updatetime}}</view> -->
+      </view>
+
+      <view class="card-row">
+        <view class="card-key">最后修改时间:</view>
+        <view class="card-value">{{item.updatetime}}</view>
+      </view>
+
+      <view class="card-row">
+        <view class="card-bottom">点击查看详情</view>
+      </view>
+      
+    </view>
+  <view class="dialog {{ showDialog ? 'dialog--show' : '' }}">
+    <view class="dialog__container">
+        <view class="dialog-close">
+          <view class="close-text">选择回放车辆:</view>
+          <icon class="close-icon" type='cancel' bindtap='dialogClose'/>
+        </view>
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label class="order-carList" wx:for="{{order.carList}}">
+            <radio value="{{item}}" class="order-carNum" />
+             <view class="order-text">{{item}}</view>
+          </label>
+        </radio-group>
+        <view class="dialog-turn">
+          <view class="turn-btn" bindtap='turnToPlayBack'>回放</view>
+        </view>
+      
+    </view>
+  </view>
+  </view>
+
+</view>
