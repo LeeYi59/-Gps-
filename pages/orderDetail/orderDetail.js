@@ -3,6 +3,7 @@ var app=getApp();
 Page({
   data: {
     showDialog: false,
+    currentIndex: 0,
     orders:{},
     order:{
       index:"",
@@ -20,7 +21,7 @@ Page({
     });
   },
 
-//列表点击事件
+  //列表点击事件
   onItemClick(e){
     that.setData({
       order:{
@@ -81,5 +82,45 @@ Page({
      
     });
     
+  },//用户点击tab时调用
+  titleClick: function (e) {
+      that.setData({
+        //拿到当前索引并动态改变
+        currentIndex: e.currentTarget.dataset.idx
+      });
+      var orderlist=app.globalData.orders;
+    //筛选订单列表  
+    switch (e.currentTarget.dataset.idx){
+      case "0":
+        that.setData({
+         orders:orderlist
+        });
+        break;
+      case "1":
+        that.setData({
+          orders: that.getOrderListByStatus(200)
+        });
+        break;
+      case "2":
+        that.setData({
+          orders: that.getOrderListByStatus(201)
+        });
+        break;
+      case "3":
+        that.setData({
+          orders: that.getOrderListByStatus(202)
+        });
+        break;
+      }
+  },
+  getOrderListByStatus:function(status){
+    var orderlist = app.globalData.orders;
+    var result = [];
+    for (var i = 0; i < orderlist.length; i++) {
+      if (orderlist[i].tradeStatus == status) {
+        result.push(orderlist[i]);
+      }
+    }
+    return result;
   }
 })

@@ -1,4 +1,25 @@
 <view class="order-container">
+    <view class='title'>
+      <view class="{{0 == currentIndex ? 'titleSel' : 'titleUnsel'}}" bindtap='titleClick' data-idx='0'>
+        <text>全部</text>
+        <hr class="{{0 == currentIndex ? 'headerLineSel' : 'headerLineUnsel'}}" />
+      </view>
+      
+      <view class="{{1 == currentIndex ? 'titleSel' : 'titleUnsel'}}" bindtap='titleClick' data-idx='1'>
+        <text>未开始</text>
+        <hr class="{{1 == currentIndex ? 'headerLineSel' : 'headerLineUnsel'}} " />
+      </view>
+
+       <view class="{{2 == currentIndex ? 'titleSel' : 'titleUnsel'}}" bindtap='titleClick' data-idx='2'>
+        <text>进行中</text>
+        <hr class="{{2 == currentIndex ? 'headerLineSel' : 'headerLineUnsel'}} " />
+      </view>
+
+       <view class="{{3 == currentIndex ? 'titleSel' : 'titleUnsel'}}" bindtap='titleClick' data-idx='3'>
+        <text>已完成</text>
+        <hr class="{{3 == currentIndex ? 'headerLineSel' : 'headerLineUnsel'}} " />
+      </view>
+    </view>
   <view class="orderlist" >
    
     <view class="card-column"  wx:for="{{orders}}" bindtap="onItemClick" id="{{index}}">
@@ -9,9 +30,6 @@
         <view class="card-person-key">收货人:</view>
         <view class="card-person-value">{{item.receiver}}</view>
       </view>
-       
-    
-
 
       <view class="card-row">
         <view class="card-key">状态:</view>
@@ -29,7 +47,6 @@
         <view class="card-key">总重量:</view>
         <view class="card-value">{{item.totalTon}}吨</view>
       </view>
-
 
       <view class="card-row">
         <view class="card-key">创建时间:</view>
@@ -54,9 +71,9 @@
           <view class="close-text">选择回放车辆:</view>
           <icon class="close-icon" type='cancel' bindtap='dialogClose'/>
         </view>
-        <radio-group class="radio-group" bindchange="radioChange">
+        <radio-group class="radio-group" bindchange="radioChange" >
           <label class="order-carList" wx:for="{{order.carList}}">
-            <radio value="{{item}}" class="order-carNum" />
+            <radio value="{{item}}" class="order-carNum" checked="{{index=='0'?true:false}}"/>
              <view class="order-text">{{item}}</view>
           </label>
         </radio-group>
