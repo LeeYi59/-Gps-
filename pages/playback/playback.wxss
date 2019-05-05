@@ -34,21 +34,22 @@
 
 .progress-button{
   padding-top: 10px;
-  padding-left: 10px;
+  padding-left: 5px;
   width: 5%;
   float: left;
   height: 62%;
 }
 .progress-slider{
-  width: 70%;
+  width: 60%;
   float: left;
 }
 .progress-text{
   padding-top: 9px;
   padding-right: 10px;
-  width: 10%;
+  width: 20%;
   float: right;
   font-size: 14px;
+  text-align: right;
   height: 100%;
   color: rgb(149, 149, 149);
 

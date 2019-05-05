@@ -9,6 +9,7 @@ var speed = 1000;
 var num = 0; //时间计数器
 var t; //定时器
 var isSlider;//是否进度条拉拽，true为是。false为否
+var imgUrl = 'http://127.0.0.1:7777/';
 Page({
   data: {
     map: {
@@ -39,6 +40,12 @@ Page({
    
     that.initData();
     t = that.playHistory(num);
+  },
+  onUnload:function(){
+    clearInterval(t);
+    num=0;
+    playlist = [];
+    collection = [];
   },
 
 
@@ -99,22 +106,23 @@ Page({
     var lng = playlist[num].longitude;
     //设置小车方向
     var angle;
-    if (num != playlist.length - 1) {
-      angle = that.getRotation(playlist[num], playlist[num+1]);
-    } else {
-      angle = 0;
-    }
+    // if (num != playlist.length - 1) {
+    //   angle = that.getRotation(playlist[num], playlist[num+1]);
+    // } else {
+    //   angle = 0;
+    // }
+    console.log(parseInt(collection[num].direction));
     that.setData({
       'map.lat': lat,
       'map.lng': lng,
       'map.markers': [{
-        iconPath: '/resources/red_90.gif',
+        iconPath: '/resources/red_0.gif',
         id: 0,
         latitude: lat,
         longitude: lng,
         width: 20,
         height: 20,
-        rotate: angle,
+        rotate: parseInt(collection[num].direction),
         anchor:{x:.5,y:.5},
         callout: {
           content: that.getCallOutContent(),
@@ -129,8 +137,8 @@ Page({
 
       }],
       'map.isShow': true,
-      'img.fronUrl': collection[num].fronUrl,
-      'img.afterUrl': collection[num].afterUrl,
+      'img.fronUrl': imgUrl+collection[num].fronUrl,
+      'img.afterUrl': imgUrl +collection[num].afterUrl,
       'img.isShow': true
     });
   },
@@ -151,34 +159,36 @@ Page({
     });
   },
 
-  //图片方向
-  getRotation: function(p1, p2) {
-    // debugger
-    var px1 = p1.longitude;
-    var py1 = p1.latitude;
-    var px2 = p2.longitude;
-    var py2 = p2.latitude;
-    var x = px2 - px1;
-    var y = py2 - py1;
-    var long = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-    var cos = x / long;
-    var rad = Math.acos(cos);
-    var deg = 180 / (Math.PI / rad);
-    if (y > 0) {
-      deg = -deg;
-    } else if ((y == 0) && (x < 0)) {
-      deg = 180;
-    }
-    return deg;
-
+  //方向
+  getDirection: function(angle) {
+    var a=parseInt(angle);
+    var direction;
+    if(a == 0)
+      direction="北";
+    else if (a > 0 && a < 90)
+      direction = "东北";
+    else if (a == 90)
+      direction = "东"; 
+    else if (a > 90 && a < 180)
+      direction = "东南"; 
+    else if (a == 180)
+      direction = "南";
+    else if (a > 180 && a < 270)
+      direction = "西南";
+    else if (a == 270)
+      direction = "西";
+    else if (a > 270 && a < 360)
+      direction = "西北"; 
+    return direction; 
   },
 
   getCallOutContent:function(){
     var trip = collection[num];
+    console.log(collection[num]);
     var content ="";
     content += "接收时间:" + trip.gpstime + "\n";
     content += "速度:" + trip.speed + "km/h" + "\n";
-    content += "方向:" + trip.direction + "\n";
+    content += "方向:" + that.getDirection(trip.direction) + "\n";
     content += "回放里程:" + trip.currentDistance + "km" + "\n";
     content += "位置:" + trip.ps ;
     return content;
@@ -207,19 +217,25 @@ Page({
     return t1;
   },
   setSliderChange(e){
+    if (num != e.detail.value) {
+      num = e.detail.value;
+
+      isSlider = true;
+    }
+    //改变进度
+    that.setData({
+      'progress.now': num,
+      'progress.isPlay': true
+    });
     if (isSlider){
       clearInterval(t);
       t = that.playHistory();
     } 
   },
   setSliderChanging(e){
-    if (num != e.detail.value) {  
+    if (num != e.detail.value  ) {  
       num = e.detail.value;
-      //改变进度
-      that.setData({
-        'progress.now': num,
-        'progress.isPlay': true
-      });
+      
       isSlider=true; 
     }
    

@@ -48,6 +48,7 @@ Page({
   },
   //选择车辆事件
   radioChange(e){
+    console.log(e)
     that.setData({
       'order.carNum': e.detail.value
     });

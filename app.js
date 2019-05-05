@@ -8,14 +8,14 @@ App({
     orders: [{
       id: 1,
       orderid:"abc",
-      createtime: "2019-04-01",
-      updatetime: "2019-04-30",
-      startTransportTime: "2019-04-01",
-      endTransportTime: "2019-04-30",
+      createtime: "2019-04-25",
+      updatetime: "2019-04-25",
+      startTransportTime: "2019-04-25",
+      endTransportTime: "2019-04-26",
       receiver: "李艺",
       remark: "备注",
       seller: "李艺",
-      carNum: "68007",
+      carNum: "67828",
       totalDistance: 111,
       totalTon: 1111,
       tradeStatus: 201
@@ -30,7 +30,7 @@ App({
       receiver: "李艺",
       remark: "备注",
       seller: "李艺",
-      carNum: "68007,68008",
+      carNum: "67828,68008",
       totalDistance: 111,
       totalTon: 1111,
       tradeStatus: 202
@@ -116,6 +116,7 @@ getData: function (begin, end, carNum) {
         'content-type': 'application/json' // 默认值
       },
       success(res) {
+        console.log(res)
         if(res.data.code==0){
           that.globalData.collection = res.data.data;
           console.log(res.data.data)
